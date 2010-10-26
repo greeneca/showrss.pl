@@ -11,3 +11,14 @@ Usage
 1) Run 'showrss.pl -c' to create a config file. Follow the on-screen prompts.
 2) Run showrss.pl and leave running.
 
+Requires
+========
+A recent install of Perl (tested with Perl 5.8.8) and the following modules:
+
+XML::Simple
+LWP::Simple
+URI::Escape
+Date::Parse
+Digest::MD5
+YAML
+
