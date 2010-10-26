@@ -1,0 +1,13 @@
+
+showrss.pl
+An automated torrent downloader
+
+ShowRSS (http://showrss.karmorra.info) creates RSS feeds for torrents of your favourite TV shows. It also allows you to create a personal feed for the shows you like.
+showrss.pl is a Perl script to automatically download new torrents that appear in your personal feed. It is designed to be run on a server running something like the Transmission daemon, configured with a watchdir.
+
+Usage
+=====
+
+1) Run 'showrss.pl -c' to create a config file. Follow the on-screen prompts.
+2) Run showrss.pl and leave running.
+
