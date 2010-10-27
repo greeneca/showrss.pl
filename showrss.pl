@@ -125,8 +125,8 @@ sub download_latest_torrents
 	{
 		# Get download URL and filename
 		my $url = uri_unescape($item->{link});
-		$url =~ /.*\/(.*)-/;
-		my $filename = $1;
+        $url =~ /\/([^\/]+)\.[^\/\$]+$/;
+		my $filename = $1; 
 
 		# Decide whether to download or skip based on pubDate
 		my $pubDate = str2time($item->{pubDate});
