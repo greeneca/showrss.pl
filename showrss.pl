@@ -9,9 +9,12 @@ use Digest::MD5;
 use POSIX qw(strftime);
 use YAML qw(LoadFile DumpFile);
 
-my $SCRIPT_NAME = 'showrss.pl';
-my $CONFIG_FILE = 'config.yml';
-my $FEED_FILE   = 'feed.xml';
+$0 =~ /^(.*)\/[^\$]+/;
+my $DATA_DIR = $1 . '/.showrss/';
+my $SCRIPT_NAME = $DATA_DIR . 'showrss.pl';
+my $CONFIG_FILE = $DATA_DIR . 'config.yml';
+my $FEED_FILE   = $DATA_DIR . 'feed.xml';
+my $LOG_FILE   = $DATA_DIR . 'log';
 my $CONFIG;
 
 main:
@@ -51,10 +54,6 @@ sub config_mode
 		chomp($CONFIG->{'DAEMONINTERVAL'});
 	}
 
-	print "Log file (full path): ";
-	$CONFIG->{'DAEMONLOGFILE'} = <STDIN>;
-	chomp($CONFIG->{'DAEMONLOGFILE'});
-
 	save_config();
 }
 
@@ -62,7 +61,7 @@ sub load_config
 {
 	$CONFIG = LoadFile($CONFIG_FILE);
 
-	if (! defined $CONFIG->{'RSS_URL'} || ! defined $CONFIG->{'DOWNLOAD_DIR'} || ! defined $CONFIG->{'LASTUPDATED'} || ! defined $CONFIG->{'DAEMONINTERVAL'} || ! defined $CONFIG->{'DAEMONLOGFILE'})
+	if (! defined $CONFIG->{'RSS_URL'} || ! defined $CONFIG->{'DOWNLOAD_DIR'} || ! defined $CONFIG->{'LASTUPDATED'} || ! defined $CONFIG->{'DAEMONINTERVAL'})
 	{
 		print "Not properly configured! Please run with -c switch to configure\n";
 		exit 1;
@@ -91,7 +90,7 @@ sub start_daemon
 
 		while (1)
 		{
-			open(LOGFILE, '>>', $CONFIG->{'DAEMONLOGFILE'});
+			open(LOGFILE, '>>', $LOG_FILE);
 			print LOGFILE '[' .  strftime("%d/%m/%Y %H:%M:%S", localtime) . '] ' . download_latest_torrents() . "\n";
 			close(LOGFILE);
 
