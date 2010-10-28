@@ -19,9 +19,18 @@ my $CONFIG;
 
 main:
 {
-	if ($#ARGV > -1 && $ARGV[0] == "-c")
+	if ($#ARGV > -1)
 	{
-		config_mode();
+		if ($ARGV[0] eq "-c")
+		{
+			config_mode();
+			exit 0;
+		}
+		if ($ARGV[0] eq "-l")
+		{
+			print "Logs in: " . $LOG_FILE . "\n";
+			exit 0;
+		}
 	}
 	else
 	{
