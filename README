@@ -11,6 +11,12 @@ Usage
 1) Run 'showrss.pl -c' to create a config file. Follow the on-screen prompts.
 2) Run showrss.pl and leave running.
 
+If you want to see where the log file is, run:
+
+showrss.pl -l
+
+The log file is appended at each interval with the number of torrents processed, whether they were downloaded, skipped or failed.
+
 Requires
 ========
 A recent install of Perl (tested with Perl 5.8.8) and the following modules:
@@ -19,6 +25,5 @@ XML::Simple
 LWP::Simple
 URI::Escape
 Date::Parse
-Digest::MD5
 YAML
 
