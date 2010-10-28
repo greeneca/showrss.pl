@@ -50,6 +50,8 @@ sub config_mode
 
 	print "Enter torrent download dir (full path): ";
 	$CONFIG->{'DOWNLOAD_DIR'} = <STDIN>;
+	# Lop off trailing slashes unless we're in the root
+	$CONFIG->{'DOWNLOAD_DIR'} =~ s/([^\/]+)[\/]*$/$1/;
 	chomp($CONFIG->{'DOWNLOAD_DIR'});
 
 	print "Would you like to download all torrents in feed? If no, only torrents released from now will be downloaded. Y/N: ";
