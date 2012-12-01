@@ -13,6 +13,7 @@ my $DATA_DIR    = $ENV{HOME} . '/.showrss/';
 my $CONFIG_FILE = $DATA_DIR . 'config.yml';
 my $FEED_FILE   = $DATA_DIR . 'feed.xml';
 my $LOGFILE     = $DATA_DIR . 'log';
+my $PIDFILE     = '/var/run/showrss.pid';
 my $CONFIG;
 
 main:
@@ -127,6 +128,9 @@ sub start_daemon
     }
     else 
     {
+        open(PIDFILE, '>', $PIDFILE) or die $!;
+        print PIDFILE $pid;
+        close(PIDFILE) or die $!;
         print "Forked. PID: $pid\n";
         exit 0;
     }
